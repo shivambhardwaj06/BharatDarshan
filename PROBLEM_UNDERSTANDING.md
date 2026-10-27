@@ -1,5 +1,5 @@
 # PROBLEM_UNDERSTANDING.md
-### Bharatdarshan (Kalayatra) — Read this FIRST before writing any code
+### BHARATDARSHAN — Read this FIRST before writing any code
 
 > **Note to the AI agent (Antigravity):** This file explains *why* the product exists. Every feature, screen, and
 > database field in `README.md` traces back to a problem written here. When you are unsure how to make a design
@@ -13,7 +13,7 @@ India's cultural tourism and local-craft economy suffer from a massive disconnec
 cities without experiencing their living soul, while the artisans who keep those traditions alive struggle for
 basic digital visibility.**
 
-Bharatdarshan (Kalayatra) is a **two-sided platform** where immersive cultural storytelling naturally drives
+**BHARATDARSHAN** is a **two-sided platform** where immersive cultural storytelling naturally drives
 footfall and orders to **verified local merchants**.
 
 ---
