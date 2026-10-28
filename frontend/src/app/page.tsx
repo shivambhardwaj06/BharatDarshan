@@ -60,44 +60,44 @@ export default function HomePage() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-20">
+      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 w-full space-y-12 sm:space-y-20 pb-28 md:pb-12">
         {/* IF A PLAN IS ACTIVE, SHOW THE EXPEDITION PLAN VIEWER */}
         {activePlan ? (
           <CinematicPlanViewer plan={activePlan} onReset={() => setActivePlan(null)} />
         ) : (
           <>
             {/* HERO SECTION: Monumental BHARATDARSHAN Typographic Showstopper */}
-            <section className="relative rounded-5xl pastel-card p-6 sm:p-14 text-center space-y-6 overflow-hidden border-2 border-ink-900/10 shadow-soft">
+            <section className="relative rounded-3xl sm:rounded-5xl pastel-card p-4 sm:p-14 text-center space-y-4 sm:space-y-6 overflow-hidden border-2 border-ink-900/10 shadow-soft">
               {/* Floating ambient shapes */}
               <div className="absolute top-0 right-10 w-72 h-72 rounded-full bg-coral-100/60 blur-3xl pointer-events-none -z-10 animate-float-gentle" />
               <div className="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-sage-100/70 blur-3xl pointer-events-none -z-10 animate-pulse-subtle" />
 
               {/* Tag pill */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] text-ink-900 text-xs sm:text-sm font-black uppercase tracking-widest">
-                <Sparkles className="w-4 h-4 text-coral-500" />
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] sm:shadow-[3px_3px_0px_0px_#1C1B18] text-ink-900 text-[10px] sm:text-sm font-black uppercase tracking-wider sm:tracking-widest">
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-coral-500" />
                 <span>Living Heritage & Journey Guide</span>
               </div>
 
               {/* CRAZY BHARATDARSHAN TYPOGRAPHY HERO */}
-              <div className="py-2">
+              <div className="py-1 sm:py-2">
                 <CrazyBharatDarshanLogo size="hero" showStickers={true} />
               </div>
 
               {/* Subheading & Description */}
-              <div className="space-y-3 max-w-2xl mx-auto">
-                <span className="font-handwriting text-3xl sm:text-4xl text-coral-500 block rotate-[-1.5deg]">
+              <div className="space-y-2 sm:space-y-3 max-w-2xl mx-auto px-1">
+                <span className="font-handwriting text-2xl sm:text-4xl text-coral-500 block rotate-[-1.5deg]">
                   don&apos;t just visit india, touch its living pulse ~
                 </span>
-                <p className="text-base sm:text-lg text-ink-700 leading-relaxed font-normal">
+                <p className="text-sm sm:text-lg text-ink-700 leading-relaxed font-normal">
                   Explore India like never before—from ancient river ghats and high Himalayan trails to golden desert dunes and misty green tea hills. Plan authentic journeys filled with deep cultural folklore, delicious local food, and verified artisan workshops.
                 </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+              {/* Action Buttons: Full-width responsive on mobile */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-3 max-w-md sm:max-w-none mx-auto w-full">
                 <button
                   onClick={() => setIsPlannerOpen(true)}
-                  className="px-8 py-4 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-950 font-black text-xs uppercase tracking-wider flex items-center gap-2.5 border-2 border-ink-900 shadow-[4px_4px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] transition-all"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] sm:shadow-[4px_4px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] transition-all"
                 >
                   <Sparkles className="w-4 h-4 text-ink-950" />
                   <span>Launch BHARATDARSHAN Planner</span>
@@ -107,7 +107,7 @@ export default function HomePage() {
                 {!user && (
                   <button
                     onClick={() => setIsAuthOpen(true)}
-                    className="px-7 py-4 rounded-2xl bg-white hover:bg-sage-50 text-ink-900 font-bold text-xs tracking-wider uppercase border-2 border-ink-900 shadow-[4px_4px_0px_0px_#1C1B18] flex items-center gap-2.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] transition-all"
+                    className="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white hover:bg-sage-50 text-ink-900 font-bold text-xs tracking-wider uppercase border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] sm:shadow-[4px_4px_0px_0px_#1C1B18] flex items-center justify-center gap-2.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] transition-all"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
                       <path
@@ -132,23 +132,23 @@ export default function HomePage() {
                 )}
               </div>
 
-              {/* Pan-India Stats Bar */}
-              <div className="pt-8 border-t border-ink-100 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
-                <div className="p-4 rounded-2xl bg-sage-50/80 border border-sage-200">
-                  <p className="text-2xl font-black font-sans text-ink-900">28 + 8</p>
-                  <p className="text-xs text-ink-600 mt-0.5">States & Union Territories</p>
+              {/* Pan-India Stats Bar: 2x2 grid on mobile with crisp styling */}
+              <div className="pt-6 sm:pt-8 border-t border-ink-100 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-3xl mx-auto text-left">
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-sage-50/80 border border-sage-200">
+                  <p className="text-xl sm:text-2xl font-black font-sans text-ink-900">28 + 8</p>
+                  <p className="text-[11px] sm:text-xs text-ink-600 mt-0.5 leading-tight">States & Union Territories</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-lavender-50/80 border border-lavender-200">
-                  <p className="text-2xl font-black font-sans text-ink-900">500+</p>
-                  <p className="text-xs text-ink-600 mt-0.5">Living Heritage Routes</p>
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-lavender-50/80 border border-lavender-200">
+                  <p className="text-xl sm:text-2xl font-black font-sans text-ink-900">500+</p>
+                  <p className="text-[11px] sm:text-xs text-ink-600 mt-0.5 leading-tight">Living Heritage Routes</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-coral-50/80 border border-coral-200">
-                  <p className="text-2xl font-black font-sans text-coral-600">100%</p>
-                  <p className="text-xs text-ink-600 mt-0.5">Direct to Local Makers</p>
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-coral-50/80 border border-coral-200">
+                  <p className="text-xl sm:text-2xl font-black font-sans text-coral-600">100%</p>
+                  <p className="text-[11px] sm:text-xs text-ink-600 mt-0.5 leading-tight">Direct to Local Makers</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-white border border-ink-200 shadow-soft">
-                  <p className="text-2xl font-black font-sans text-sage-800">0%</p>
-                  <p className="text-xs text-ink-600 mt-0.5">Middleman Commissions</p>
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-ink-200 shadow-soft">
+                  <p className="text-xl sm:text-2xl font-black font-sans text-sage-800">0%</p>
+                  <p className="text-[11px] sm:text-xs text-ink-600 mt-0.5 leading-tight">Middleman Commissions</p>
                 </div>
               </div>
             </section>
@@ -236,26 +236,26 @@ export default function HomePage() {
             </section>
 
             {/* ARTISAN GATEWAY SECTION */}
-            <section className="rounded-5xl bg-sage-50/80 p-8 sm:p-12 border-2 border-sage-200 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-soft">
-              <div className="space-y-2 max-w-xl">
-                <span className="text-[11px] font-black uppercase tracking-wider text-sage-800 flex items-center gap-1.5">
-                  <Store className="w-4 h-4 text-sage-700" />
+            <section className="rounded-3xl sm:rounded-5xl bg-sage-50/80 p-5 sm:p-12 border-2 border-sage-200 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6 shadow-soft">
+              <div className="space-y-1.5 sm:space-y-2 max-w-xl">
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-sage-800 flex items-center gap-1.5">
+                  <Store className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-sage-700" />
                   <span>Artisans, Craftsmen & Workshops Across India</span>
                 </span>
-                <span className="font-handwriting text-2xl text-coral-500 block rotate-[-1deg]">
+                <span className="font-handwriting text-xl sm:text-2xl text-coral-500 block rotate-[-1deg]">
                   empowering authentic local craft ~
                 </span>
-                <h3 className="text-2xl font-serif font-bold text-ink-900 -mt-2">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-ink-900 -mt-1 sm:-mt-2">
                   Are you a local artisan, craftsman or weaver in India?
                 </h3>
-                <p className="text-sm text-ink-700 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-normal">
                   Join the dedicated BHARATDARSHAN Merchant Portal. Get verified to appear naturally in travelers&apos; itineraries visiting your region—100% free with zero middleman commissions.
                 </p>
               </div>
 
               <Link
                 href="/merchant"
-                className="px-8 py-4 rounded-2xl bg-sage-600 hover:bg-sage-700 text-white font-black text-xs uppercase tracking-wider whitespace-nowrap border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] flex items-center gap-2 transition-all shrink-0"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-sage-600 hover:bg-sage-700 text-white font-black text-xs uppercase tracking-wider whitespace-nowrap border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#1C1B18] flex items-center justify-center gap-2 transition-all shrink-0"
               >
                 <span>Enter Artisan Portal</span>
                 <ArrowRight className="w-4 h-4" />
@@ -281,20 +281,20 @@ export default function HomePage() {
       />
 
       {/* FOOTER WITH CRAZY BHARATDARSHAN TYPOGRAPHIC MARQUEE */}
-      <footer className="mt-auto border-t-2 border-ink-900/10 py-12 bg-white/80 text-center relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 space-y-4">
+      <footer className="mt-auto border-t-2 border-ink-900/10 py-8 sm:py-12 pb-24 sm:pb-12 bg-white/80 text-center relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 space-y-3 sm:space-y-4">
           <div className="flex items-center justify-center">
-            <span className="font-black text-4xl sm:text-7xl font-sans tracking-[0.25em] text-ink-200/50 uppercase select-none hover:text-coral-200 transition-colors">
+            <span className="font-black text-3xl min-[360px]:text-4xl sm:text-7xl font-sans tracking-[0.14em] sm:tracking-[0.25em] text-ink-200/50 uppercase select-none hover:text-coral-200 transition-colors">
               BHARATDARSHAN
             </span>
           </div>
-          <p className="font-handwriting text-2xl sm:text-3xl text-coral-500">
+          <p className="font-handwriting text-xl sm:text-3xl text-coral-500">
             may your travels be gentle, peaceful & authentic ~
           </p>
-          <p className="text-xs sm:text-sm text-ink-600 font-medium">
+          <p className="text-[11px] sm:text-sm text-ink-600 font-medium tracking-wide">
             ✦ BHARATDARSHAN • LIVING CULTURAL EXPEDITIONS ✦
           </p>
-          <p className="text-xs text-ink-500 font-mono">
+          <p className="text-[10px] sm:text-xs text-ink-500 font-mono">
             Powered by Local Guides & Verified Cultural Guilds
           </p>
         </div>

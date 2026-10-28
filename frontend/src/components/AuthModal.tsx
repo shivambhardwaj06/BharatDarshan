@@ -51,28 +51,31 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/30 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md rounded-4xl bg-[#FDFCF8] p-8 border border-ink-200 shadow-floating text-ink-900">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-ink-900/50 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md rounded-t-[32px] sm:rounded-4xl bg-[#FDFCF8] p-5 sm:p-8 border-t-2 sm:border border-ink-200 shadow-floating text-ink-900 max-h-[92vh] overflow-y-auto overscroll-contain">
+        {/* Mobile Drag Indicator Handle */}
+        <div className="w-12 h-1 bg-ink-300 rounded-full mx-auto mb-3 sm:hidden" />
+
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full hover:bg-ink-100 text-ink-400 hover:text-ink-800 transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full hover:bg-ink-100 text-ink-400 hover:text-ink-800 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-coral-100 border border-coral-200 flex items-center justify-center mx-auto mb-3 shadow-soft text-coral-600">
-            <Sparkles className="w-6 h-6" />
+        <div className="text-center mb-5 sm:mb-6">
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-coral-100 border border-coral-200 flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-soft text-coral-600">
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <span className="font-handwriting text-2xl text-coral-500 block rotate-[-2deg]">
+          <span className="font-handwriting text-xl sm:text-2xl text-coral-500 block rotate-[-2deg]">
             welcome to mindful yatra ~
           </span>
-          <h3 className="text-2xl font-serif font-bold text-ink-900 tracking-tight mt-1">
+          <h3 className="text-xl sm:text-2xl font-serif font-bold text-ink-900 tracking-tight mt-0.5">
             {mode === 'login' ? 'Welcome Back, Traveler' : 'Join Our Travel Community'}
           </h3>
-          <p className="text-xs text-ink-500 mt-1">
+          <p className="text-[11px] sm:text-xs text-ink-500 mt-1 max-w-xs mx-auto">
             Save your cultural trails, bookmark artisan guilds, and customize itineraries.
           </p>
         </div>
@@ -82,7 +85,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
           type="button"
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-sage-50 text-ink-800 font-semibold text-xs tracking-wider flex items-center justify-center gap-3 border border-ink-200/90 shadow-soft transition-all hover:scale-[1.01] mb-5 disabled:opacity-50"
+          className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-sage-50 text-ink-800 font-bold text-xs tracking-wider flex items-center justify-center gap-3 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] transition-all active:scale-[0.99] mb-4 sm:mb-5 disabled:opacity-50"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -106,16 +109,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
         </button>
 
         {/* Soft Divider */}
-        <div className="relative flex items-center justify-center mb-5">
+        <div className="relative flex items-center justify-center mb-4 sm:mb-5">
           <div className="border-t border-ink-200 w-full" />
-          <span className="bg-[#FDFCF8] px-3 text-[11px] uppercase tracking-widest text-ink-400 font-semibold">
+          <span className="bg-[#FDFCF8] px-3 text-[10px] sm:text-[11px] uppercase tracking-widest text-ink-400 font-semibold">
             Or with email
           </span>
           <div className="border-t border-ink-200 w-full" />
         </div>
 
         {/* Email & Password Form */}
-        <form onSubmit={handleSubmit} className="space-y-3.5">
+        <form onSubmit={handleSubmit} className="space-y-3">
           {mode === 'register' && (
             <div>
               <label className="block text-[11px] font-semibold uppercase tracking-wider text-ink-600 mb-1">
@@ -129,7 +132,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Ananya Sharma"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-base sm:text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
                 />
               </div>
             </div>
@@ -147,7 +150,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-base sm:text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
               />
             </div>
           </div>
@@ -164,7 +167,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-ink-200 text-ink-900 text-base sm:text-xs placeholder:text-ink-400 focus:outline-none focus:border-coral-400 shadow-inner"
               />
             </div>
           </div>
@@ -172,14 +175,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-900 font-bold text-xs uppercase tracking-wider transition-all shadow-coral disabled:opacity-50 mt-2"
+            className="w-full py-3.5 px-4 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-950 font-black text-xs uppercase tracking-wider transition-all border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50 mt-2"
           >
             {loading ? 'Entering...' : mode === 'login' ? 'Sign In' : 'Create Free Account'}
           </button>
         </form>
 
         {/* Toggle Mode */}
-        <div className="mt-5 text-center text-xs text-ink-500">
+        <div className="mt-4 sm:mt-5 text-center text-xs text-ink-500">
           {mode === 'login' ? (
             <>
               First time here?{' '}
@@ -203,7 +206,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
           )}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-ink-100 flex items-center justify-center gap-1.5 text-[11px] text-ink-400">
+        <div className="mt-5 pt-3 border-t border-ink-100 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] text-ink-400 pb-2 sm:pb-0">
           <ShieldCheck className="w-3.5 h-3.5 text-sage-600" />
           <span>Mindful privacy • Zero spam guarantee</span>
         </div>

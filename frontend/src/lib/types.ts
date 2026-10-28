@@ -36,6 +36,9 @@ export interface VerifiedArtisanStop {
   business_name: string;
   artisan_name: string;
   waypoint_location: string;
+  route_marker_km?: string;
+  influence_headline?: string;
+  why_you_cannot_miss?: string;
   craft_specialty: string;
   story_snippet: string;
   verification_tier: string;
@@ -50,6 +53,11 @@ export interface PlanDay {
   elevation_profile: string;
   distance_km: number;
   day_image?: string;
+  route_title?: string;
+  from_where?: string;
+  to_where?: string;
+  terrain_type?: string;
+  milestone_summary?: string;
   route_steps: RouteStep[];
   verified_artisan_stops?: VerifiedArtisanStop[];
 }
@@ -75,6 +83,9 @@ export interface DeepCulturalGuide {
   cultural_etiquette: string[];
   traditional_gastronomy: GastronomyItem[];
   heritage_crafts: CraftItem[];
+  sacred_lore_image?: string;
+  living_traditions_image?: string;
+  community_image?: string;
 }
 
 export interface PracticalEssentials {

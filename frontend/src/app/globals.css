@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Reenie+Beanie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Reenie+Beanie&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,6 +9,11 @@
   --foreground: #2D2B28;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -16,6 +21,8 @@ body {
   overflow-x: hidden;
   selection-background-color: #FFB7B2;
   selection-color: #1C1B18;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 /* Subtle organic grain overlay across the entire page */
@@ -25,7 +32,7 @@ body {
 
 /* Soft Aesthetic Card styling */
 .pastel-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(232, 228, 220, 0.7);
@@ -47,9 +54,23 @@ body {
   line-height: 1;
 }
 
-/* Custom Soft Scrollbar */
+/* Hide scrollbar for Chrome, Safari and Opera on horizontal chips */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom Soft Scrollbar for desktop */
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #FDFCF8;
@@ -60,4 +81,12 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #D3CDC4;
+}
+
+/* Mobile Safe Area utilities */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.pb-dock {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
 }

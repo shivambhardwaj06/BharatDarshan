@@ -63,14 +63,19 @@ type ScheduleOverview struct {
 }
 
 type PlanDay struct {
-	DayNumber             int                    `json:"day_number"`
-	Title                 string                 `json:"title"`
-	DateOrPhase           string                 `json:"date_or_phase"`
-	ElevationProfile      string                 `json:"elevation_profile"`
-	DistanceKm            float64                `json:"distance_km"`
-	DayImage              string                 `json:"day_image,omitempty"`
-	RouteSteps            []RouteStep            `json:"route_steps"`
-	VerifiedArtisanStops  []VerifiedArtisanStop  `json:"verified_artisan_stops,omitempty"`
+	DayNumber             int                   `json:"day_number"`
+	Title                 string                `json:"title"`
+	DateOrPhase           string                `json:"date_or_phase"`
+	ElevationProfile      string                `json:"elevation_profile"`
+	DistanceKm            float64               `json:"distance_km"`
+	DayImage              string                `json:"day_image,omitempty"`
+	RouteTitle            string                `json:"route_title,omitempty"`
+	FromWhere             string                `json:"from_where,omitempty"`
+	ToWhere               string                `json:"to_where,omitempty"`
+	TerrainType           string                `json:"terrain_type,omitempty"`
+	MilestoneSummary      string                `json:"milestone_summary,omitempty"`
+	RouteSteps            []RouteStep           `json:"route_steps"`
+	VerifiedArtisanStops  []VerifiedArtisanStop `json:"verified_artisan_stops,omitempty"`
 }
 
 type RouteStep struct {
@@ -83,25 +88,31 @@ type RouteStep struct {
 
 // Authentic Artisan Stop embedded in route
 type VerifiedArtisanStop struct {
-	MerchantID       uuid.UUID `json:"merchant_id"`
-	BusinessName     string    `json:"business_name"`
-	ArtisanName      string    `json:"artisan_name"`
-	WaypointLocation string    `json:"waypoint_location"` // e.g. "Trek Trail KM 4.5, Jungle Chatti"
-	CraftSpecialty   string    `json:"craft_specialty"`
-	StorySnippet     string    `json:"story_snippet"`
-	VerificationTier string    `json:"verification_tier"` // "Verified Master Maker"
-	SpecialImmersion string    `json:"special_immersion"` // e.g. "Free Himalayan Rhododendron Tea + Live Loom Demonstration"
-	ImageURL         string    `json:"image_url"`
+	MerchantID        uuid.UUID `json:"merchant_id"`
+	BusinessName      string    `json:"business_name"`
+	ArtisanName       string    `json:"artisan_name"`
+	WaypointLocation  string    `json:"waypoint_location"` // e.g. "Trek Trail KM 4.5, Jungle Chatti"
+	RouteMarkerKm     string    `json:"route_marker_km,omitempty"`
+	InfluenceHeadline string    `json:"influence_headline,omitempty"`
+	WhyYouCannotMiss  string    `json:"why_you_cannot_miss,omitempty"`
+	CraftSpecialty    string    `json:"craft_specialty"`
+	StorySnippet      string    `json:"story_snippet"`
+	VerificationTier  string    `json:"verification_tier"` // "Verified Master Maker"
+	SpecialImmersion  string    `json:"special_immersion"` // e.g. "Free Himalayan Rhododendron Tea + Live Loom Demonstration"
+	ImageURL          string    `json:"image_url"`
 }
 
 // Deep Cultural Dive
 type DeepCulturalGuide struct {
-	SacredLoreAndMythology  string            `json:"sacred_lore_and_mythology"`
-	LivingTraditions        string            `json:"living_traditions"`
-	CommunityAndPeople      string            `json:"community_and_people"`
-	CulturalEtiquette       []string          `json:"cultural_etiquette"`
-	TraditionalGastronomy   []GastronomyItem  `json:"traditional_gastronomy"`
-	HeritageCrafts          []CraftItem       `json:"heritage_crafts"`
+	SacredLoreAndMythology string           `json:"sacred_lore_and_mythology"`
+	LivingTraditions       string           `json:"living_traditions"`
+	CommunityAndPeople     string           `json:"community_and_people"`
+	CulturalEtiquette      []string         `json:"cultural_etiquette"`
+	TraditionalGastronomy  []GastronomyItem `json:"traditional_gastronomy"`
+	HeritageCrafts         []CraftItem      `json:"heritage_crafts"`
+	SacredLoreImage        string           `json:"sacred_lore_image,omitempty"`
+	LivingTraditionsImage  string           `json:"living_traditions_image,omitempty"`
+	CommunityImage         string           `json:"community_image,omitempty"`
 }
 
 type GastronomyItem struct {

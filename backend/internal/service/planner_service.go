@@ -290,16 +290,30 @@ func (s *PlannerService) GeneratePlan(req domain.TripPlanRequest) (domain.TripPl
 	var embeddedStops []domain.VerifiedArtisanStop
 	for _, m := range s.merchants {
 		if strings.EqualFold(m.RouteTarget, dest.ID) && m.VerificationStatus == domain.StatusVerified {
+			artisanImg := "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80"
+			if dest.ID == "varanasi" {
+				artisanImg = "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80"
+			} else if dest.ID == "jaisalmer" {
+				artisanImg = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80"
+			} else if dest.ID == "munnar" {
+				artisanImg = "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+			} else if dest.ID == "spiti" {
+				artisanImg = "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+			}
+
 			embeddedStops = append(embeddedStops, domain.VerifiedArtisanStop{
-				MerchantID:       m.ID,
-				BusinessName:     m.BusinessName,
-				ArtisanName:      m.ArtisanName,
-				WaypointLocation: m.ExactWaypoint,
-				CraftSpecialty:   m.CraftSpecialty,
-				StorySnippet:     m.ArtisanStory,
-				VerificationTier: "Verified Master Maker",
-				SpecialImmersion: m.SpecialImmersion,
-				ImageURL:         "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=600&q=80",
+				MerchantID:        m.ID,
+				BusinessName:      m.BusinessName,
+				ArtisanName:       m.ArtisanName,
+				WaypointLocation:  m.ExactWaypoint,
+				RouteMarkerKm:     m.ExactWaypoint,
+				InfluenceHeadline: "🛑 MANDATORY CULTURAL ANCHOR: Unmissable high-priority waypoint on this route",
+				WhyYouCannotMiss:  "Visiting this master artisan is an essential living waypoint on your journey. Do not bypass this generational workshop.",
+				CraftSpecialty:    m.CraftSpecialty,
+				StorySnippet:      m.ArtisanStory,
+				VerificationTier:  "Verified Master Maker",
+				SpecialImmersion:  m.SpecialImmersion,
+				ImageURL:          artisanImg,
 			})
 		}
 	}

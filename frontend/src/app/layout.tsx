@@ -1,10 +1,25 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'BHARATDARSHAN — Mindful Expeditions & Living Cultural Waypoints Across India',
   description:
     'BHARATDARSHAN: A soft, mindful journey planner for travelers across India. Explore living heritage, authentic local culture, and verified master artisans across all 28 states and 8 union territories.',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#1C1B18',
 };
 
 export default function RootLayout({

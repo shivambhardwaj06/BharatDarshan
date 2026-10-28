@@ -117,10 +117,11 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
   onSelectDest,
   onOpenPlanner,
 }) => {
-  const [hoveredDest, setHoveredDest] = useState<DestinationMeta | null>(null);
+  const [hoveredPinId, setHoveredPinId] = useState<string | null>(null);
   const [hoveredStateId, setHoveredStateId] = useState<string | null>(null);
 
-  const active = hoveredDest || selectedDest || destinations[0];
+  // Stable active destination: Selection is solid on click, avoiding erratic jumps on mouse move
+  const active = selectedDest || destinations[0];
   const activePinConfig = active ? PIN_CONFIGS[active.id] : PIN_CONFIGS[destinations[0]?.id || 'varanasi'];
 
   // Handle clicking directly on an Indian state on the vector map
@@ -135,54 +136,60 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
   };
 
   return (
-    <div className="relative rounded-5xl pastel-card p-6 sm:p-10 overflow-hidden border-2 border-ink-900/10 shadow-card">
+    <div className="relative rounded-3xl sm:rounded-5xl pastel-card p-4 sm:p-10 overflow-hidden border-2 border-ink-900/10 shadow-card">
       {/* Background ambient pastel shapes */}
       <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-sage-100/60 blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-coral-100/60 blur-[100px] pointer-events-none" />
 
       {/* Header section with breathing room */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 pb-6 border-b border-ink-100">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-ink-900 text-xs font-black uppercase tracking-wider border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18]">
-            <Compass className="w-4 h-4 text-coral-500" />
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-ink-100">
+        <div className="space-y-1.5 sm:space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-ink-900 text-[11px] sm:text-xs font-black uppercase tracking-wider border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18]">
+            <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-coral-500" />
             <span>Interactive Atlas of India</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-ink-900 tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink-900 tracking-tight">
             Where are you next planning to visit?
           </h2>
 
-          <p className="font-handwriting text-2xl sm:text-3xl text-coral-500">
+          <p className="font-handwriting text-xl sm:text-3xl text-coral-500">
             tap any state or mountain pin on the map to begin your journey ~
           </p>
         </div>
 
-        {/* Soft pastel pill selectors for quick switching */}
-        <div className="flex flex-wrap gap-2.5 self-start sm:self-auto">
-          {destinations.map((d) => {
-            const isSelected = active?.id === d.id;
-            return (
-              <button
-                key={d.id}
-                onClick={() => {
-                  onSelectDest(d);
-                }}
-                onMouseEnter={() => setHoveredDest(d)}
-                onMouseLeave={() => setHoveredDest(null)}
-                className={`px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
-                  isSelected
-                    ? 'bg-coral-300 text-ink-950 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] scale-105'
-                    : 'bg-white hover:bg-sage-50 text-ink-700 border-2 border-ink-200'
-                }`}
-              >
-                <span>{d.name.split(' ')[0]}</span>
-                {isSelected && (
-                  <span className="w-2 h-2 rounded-full bg-coral-500 animate-ping" />
-                )}
-              </button>
-            );
-          })}
+        {/* Soft pastel pill selectors: swipeable snap-carousel on mobile, flex-wrap on desktop */}
+        <div className="w-full sm:w-auto overflow-hidden">
+          <div className="flex sm:flex-wrap items-center gap-2 pb-2 sm:pb-0 overflow-x-auto scrollbar-none snap-x -mx-1 px-1">
+            {destinations.map((d) => {
+              const isSelected = active?.id === d.id;
+              return (
+                <button
+                  key={d.id}
+                  onClick={() => {
+                    onSelectDest(d);
+                  }}
+                  className={`shrink-0 snap-start px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+                    isSelected
+                      ? 'bg-coral-300 text-ink-950 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] scale-[1.02] sm:scale-105'
+                      : 'bg-white hover:bg-sage-50 text-ink-700 border-2 border-ink-200'
+                  }`}
+                >
+                  <span>{d.name.split(' ')[0]}</span>
+                  {isSelected && (
+                    <span className="w-2 h-2 rounded-full bg-coral-500" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
+      </div>
+
+      {/* Mobile Interactive Hint Bar */}
+      <div className="sm:hidden flex items-center justify-center gap-1.5 py-1.5 px-3 text-[11px] font-mono font-bold text-ink-600 bg-white/80 border border-ink-200 rounded-2xl mb-4 shadow-2xs">
+        <span className="w-2 h-2 rounded-full bg-coral-400 animate-pulse" />
+        <span>Tap any pin or colored state on map to view details</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -296,18 +303,8 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
                       strokeLinecap="round"
                       className="transition-colors duration-200 cursor-pointer"
                       onClick={() => handleStateClick(loc.id)}
-                      onMouseEnter={() => {
-                        setHoveredStateId(loc.id);
-                        const destId = STATE_TO_DEST[loc.id];
-                        if (destId) {
-                          const match = destinations.find((d) => d.id === destId);
-                          if (match) setHoveredDest(match);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        setHoveredStateId(null);
-                        setHoveredDest(null);
-                      }}
+                      onMouseEnter={() => setHoveredStateId(loc.id)}
+                      onMouseLeave={() => setHoveredStateId(null)}
                     >
                       <title>{loc.name}</title>
                     </path>
@@ -345,6 +342,7 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
                 if (!cfg) return null;
 
                 const isSelected = active?.id === d.id;
+                const isHovered = hoveredPinId === d.id;
 
                 return (
                   <g
@@ -352,33 +350,44 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
                     className="cursor-pointer group"
                     onClick={() => {
                       onSelectDest(d);
-                      onOpenPlanner(d);
                     }}
-                    onMouseEnter={() => setHoveredDest(d)}
-                    onMouseLeave={() => setHoveredDest(null)}
+                    onMouseEnter={() => setHoveredPinId(d.id)}
+                    onMouseLeave={() => setHoveredPinId(null)}
                   >
-                    {/* Glowing Ping Ring for selected pin */}
+                    {/* Glowing Ping Ring for selected pin - strictly pinned to cx, cy via SVG animate */}
                     {isSelected && (
                       <circle
                         cx={cfg.x}
                         cy={cfg.y}
-                        r="24"
+                        r="16"
                         fill="none"
                         stroke={cfg.color}
-                        strokeWidth="2"
-                        strokeOpacity="0.6"
-                        className="animate-ping opacity-35 origin-center"
-                      />
+                        strokeWidth="2.5"
+                        opacity="0.8"
+                      >
+                        <animate
+                          attributeName="r"
+                          values="12;26;12"
+                          dur="2.4s"
+                          repeatCount="indefinite"
+                        />
+                        <animate
+                          attributeName="opacity"
+                          values="0.85;0.1;0.85"
+                          dur="2.4s"
+                          repeatCount="indefinite"
+                        />
+                      </circle>
                     )}
 
                     {/* Outer Pastel Halo */}
                     <circle
                       cx={cfg.x}
                       cy={cfg.y}
-                      r={isSelected ? '16' : '12'}
+                      r={isSelected ? '16' : isHovered ? '14' : '11'}
                       fill={cfg.bg}
                       stroke={cfg.color}
-                      strokeWidth="2"
+                      strokeWidth={isSelected || isHovered ? '2.5' : '1.5'}
                       className="transition-all duration-300"
                       filter="url(#pinShadow)"
                     />
@@ -438,9 +447,9 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
             ========================================================= */}
         <div className="lg:col-span-5 space-y-4">
           {active && (
-            <div className="rounded-5xl bg-white p-6 sm:p-8 border-2 border-ink-900/10 shadow-card relative overflow-hidden group">
+            <div className="rounded-3xl sm:rounded-5xl bg-white p-4 sm:p-8 border-2 border-ink-900/10 shadow-card relative overflow-hidden group">
               {/* Polaroid-style hero image */}
-              <div className="relative h-56 w-full rounded-3xl overflow-hidden mb-6 shadow-inner border-2 border-canvas">
+              <div className="relative h-44 sm:h-56 w-full rounded-2xl sm:rounded-3xl overflow-hidden mb-4 sm:mb-6 shadow-inner border-2 border-canvas">
                 <img
                   src={active.hero_image}
                   alt={active.name}
@@ -448,16 +457,16 @@ export const IndiaInteractiveMap: React.FC<IndiaMapProps> = ({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />
 
-                <div className="absolute top-3.5 left-3.5 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-ink-900 text-xs font-bold tracking-wide border border-ink-900/10 shadow-soft">
+                <div className="absolute top-3 left-3 sm:top-3.5 sm:left-3.5 flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/95 backdrop-blur-md text-ink-900 text-[11px] sm:text-xs font-bold tracking-wide border border-ink-900/10 shadow-soft">
                   <MapPin className="w-3.5 h-3.5 text-coral-500" />
                   <span>{active.state}</span>
                 </div>
 
-                <div className="absolute bottom-3.5 left-4 right-4 text-white">
-                  <p className="font-handwriting text-2xl text-coral-300">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-3.5 sm:left-4 sm:right-4 text-white">
+                  <p className="font-handwriting text-xl sm:text-2xl text-coral-300">
                     {active.hindi_name}
                   </p>
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight -mt-1">
+                  <h3 className="text-xl sm:text-3xl font-serif font-bold tracking-tight -mt-1">
                     {active.name}
                   </h3>
                 </div>

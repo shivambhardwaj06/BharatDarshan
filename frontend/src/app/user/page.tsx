@@ -210,33 +210,33 @@ export default function UserPortalPage() {
         onOpenPlanner={() => {}}
       />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full space-y-12">
+      <main className="max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-10 flex-1 w-full space-y-6 sm:space-y-12 pb-28 md:pb-12">
         {/* Profile Card Header */}
-        <div className="rounded-5xl bg-white p-6 sm:p-8 border-2 border-ink-900/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
+        <div className="rounded-3xl sm:rounded-5xl bg-white p-4 sm:p-8 border-2 border-ink-900/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-4">
             <img
               src={user.avatar}
               alt={user.name}
-              className="w-16 h-16 rounded-full object-cover border-2 border-coral-300 shadow-soft"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-coral-300 shadow-soft shrink-0"
             />
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-handwriting text-2xl text-coral-500 block rotate-[-2deg]">
+                <span className="font-handwriting text-xl sm:text-2xl text-coral-500 block rotate-[-2deg]">
                   traveler sanctuary ~
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-ink-900 text-canvas text-[10px] font-mono font-black uppercase">
+                <span className="px-2 py-0.5 rounded-full bg-ink-900 text-canvas text-[9px] sm:text-[10px] font-mono font-black uppercase">
                   BHARATDARSHAN MEMBER
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink-900 -mt-1">{user.name}</h1>
-              <p className="text-xs sm:text-sm text-ink-600">{user.email} • Exploring All 28 States & 8 Union Territories</p>
+              <h1 className="text-xl sm:text-3xl font-serif font-bold text-ink-900 -mt-0.5 sm:-mt-1">{user.name}</h1>
+              <p className="text-[11px] sm:text-sm text-ink-600 line-clamp-1">{user.email} • Exploring All 28 States & 8 UTs</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <Link
               href="/"
-              className="px-6 py-3.5 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-950 font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all"
+              className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-coral-300 hover:bg-coral-400 text-ink-950 font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 border-2 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all"
             >
               <Sparkles className="w-4 h-4" />
               <span>Plan New Trip on Map</span>
@@ -245,22 +245,22 @@ export default function UserPortalPage() {
         </div>
 
         {/* Quick Stats Counter */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-          <div className="p-4 rounded-3xl bg-coral-50 border-2 border-ink-900 shadow-soft">
-            <span className="text-xs font-mono font-bold text-coral-700 block uppercase">Saved Journeys</span>
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-ink-900">4 Routes</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
+          <div className="p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-coral-50 border-2 border-ink-900 shadow-soft">
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-coral-700 block uppercase">Saved Journeys</span>
+            <span className="text-xl sm:text-3xl font-serif font-bold text-ink-900">4 Routes</span>
           </div>
-          <div className="p-4 rounded-3xl bg-sage-50 border-2 border-ink-900 shadow-soft">
-            <span className="text-xs font-mono font-bold text-sage-700 block uppercase">Verified Makers</span>
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-ink-900">5 Bookmarked</span>
+          <div className="p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-sage-50 border-2 border-ink-900 shadow-soft">
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-sage-700 block uppercase">Verified Makers</span>
+            <span className="text-xl sm:text-3xl font-serif font-bold text-ink-900">5 Bookmarked</span>
           </div>
-          <div className="p-4 rounded-3xl bg-lavender-50 border-2 border-ink-900 shadow-soft">
-            <span className="text-xs font-mono font-bold text-lavender-700 block uppercase">States Explored</span>
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-ink-900">UP, Ladakh, RJ, KL</span>
+          <div className="p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-lavender-50 border-2 border-ink-900 shadow-soft">
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-lavender-700 block uppercase">States Explored</span>
+            <span className="text-lg sm:text-2xl font-serif font-bold text-ink-900 truncate block">UP, Ladakh, RJ</span>
           </div>
-          <div className="p-4 rounded-3xl bg-white border-2 border-ink-900 shadow-soft">
-            <span className="text-xs font-mono font-bold text-ink-600 block uppercase">Middleman Fee</span>
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-700">₹0 Always</span>
+          <div className="p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-white border-2 border-ink-900 shadow-soft">
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-ink-600 block uppercase">Middleman Fee</span>
+            <span className="text-xl sm:text-3xl font-serif font-bold text-emerald-700">₹0 Always</span>
           </div>
         </div>
 

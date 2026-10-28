@@ -243,8 +243,8 @@ export default function MerchantPortalPage() {
     <div className="min-h-screen bg-[#FDFCF8] text-[#2D2B28] flex flex-col font-sans selection:bg-sage-200 selection:text-ink-900">
       {/* Merchant Top Header */}
       <header className="border-b-2 border-ink-900/10 bg-white/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3">
             <CrazyBharatDarshanLogo size="md" />
             <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-sage-100 text-sage-800 text-[11px] font-mono font-black uppercase tracking-widest border border-sage-300">
               ALL-INDIA MAKER & ARTISAN DESK
@@ -253,37 +253,37 @@ export default function MerchantPortalPage() {
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-ink-900 px-4 py-2 rounded-2xl bg-white hover:bg-sage-50 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all font-bold"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-ink-900 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl bg-white hover:bg-sage-50 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all font-bold"
           >
-            <ArrowLeft className="w-4 h-4 text-coral-500" />
-            <span>Return to Tourist App</span>
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-coral-500" />
+            <span>Tourist App</span>
           </Link>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full space-y-10">
+      <main className="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-12 flex-1 w-full space-y-6 sm:space-y-10 pb-28 md:pb-12">
         {/* Banner Explaining Pan-India Purpose */}
-        <div className="rounded-5xl bg-sage-50/90 p-8 sm:p-12 border-2 border-ink-900/10 shadow-soft relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-sage-800 text-xs font-black uppercase tracking-wider border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18]">
-              <ShieldCheck className="w-4 h-4 text-sage-600" />
+        <div className="rounded-3xl sm:rounded-5xl bg-sage-50/90 p-5 sm:p-12 border-2 border-ink-900/10 shadow-soft relative overflow-hidden">
+          <div className="max-w-3xl space-y-3 sm:space-y-4">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-sage-800 text-[11px] sm:text-xs font-black uppercase tracking-wider border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18]">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-sage-600" />
               <span>PAN-INDIA LOCAL ARTISAN & MAKER NETWORK</span>
             </div>
 
-            <span className="font-handwriting text-3xl sm:text-4xl text-coral-500 block rotate-[-1.5deg]">
+            <span className="font-handwriting text-2xl sm:text-4xl text-coral-500 block rotate-[-1.5deg]">
               welcome travelers directly to your workshop ~
             </span>
 
-            <h1 className="text-3xl sm:text-5xl font-serif font-bold text-ink-900 tracking-tight -mt-1 leading-tight">
+            <h1 className="text-2xl sm:text-5xl font-serif font-bold text-ink-900 tracking-tight -mt-1 leading-tight">
               Connect Directly with Incoming Travelers Across India
             </h1>
 
-            <p className="text-base sm:text-lg text-ink-700 leading-relaxed font-normal">
+            <p className="text-sm sm:text-lg text-ink-700 leading-relaxed font-normal">
               Whether you weave silk in Varanasi, spin pure pashmina in Ladakh, carve sandstone in Rajasthan, grow spices in Kerala, or weave sheep wool in the Himalayas—join BHARATDARSHAN. Complete a quick verification and we feature your workshop inside traveler itineraries as an authentic cultural waypoint.
             </p>
 
-            <div className="pt-3 flex flex-wrap gap-4 text-xs sm:text-sm text-sage-900 font-bold">
+            <div className="pt-2 sm:pt-3 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-sage-900 font-bold">
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-white border border-sage-200 shadow-soft">
                 <CheckCircle2 className="w-4 h-4 text-sage-600" /> 0% Middleman Commission
               </span>
@@ -299,20 +299,20 @@ export default function MerchantPortalPage() {
 
         {/* REGIONAL PRESET SELECTOR (Showcases Pan-India Diversity) */}
         {!isVerified && (
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <h3 className="text-base font-serif font-bold text-ink-900 flex items-center gap-2">
+                <h3 className="text-sm sm:text-base font-serif font-bold text-ink-900 flex items-center gap-2">
                   <Compass className="w-4 h-4 text-coral-500" />
                   <span>Choose Your Region or Corridors Across India</span>
                 </h3>
-                <p className="text-xs text-ink-600 font-medium">
-                  Click any regional craft to fill the form with an example, then easily customize your details below:
+                <p className="text-[11px] sm:text-xs text-ink-600 font-medium">
+                  Swipe or click any regional craft to fill the form with an example, then easily customize your details below:
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+            <div className="flex sm:grid overflow-x-auto sm:overflow-visible pb-2 sm:pb-0 scrollbar-none snap-x sm:grid-cols-3 lg:grid-cols-6 gap-2.5 -mx-1 px-1">
               {REGIONAL_PRESETS.map((p) => {
                 const isActive = selectedPresetId === p.id;
                 return (
@@ -320,7 +320,7 @@ export default function MerchantPortalPage() {
                     key={p.id}
                     type="button"
                     onClick={() => applyPreset(p)}
-                    className={`p-3 rounded-3xl text-left border-2 transition-all flex flex-col justify-between h-28 relative overflow-hidden group ${
+                    className={`shrink-0 snap-start w-40 xs:w-44 sm:w-auto p-3 rounded-2xl sm:rounded-3xl text-left border-2 transition-all flex flex-col justify-between h-28 relative overflow-hidden group ${
                       isActive
                         ? 'bg-coral-100/80 border-ink-900 shadow-[3px_3px_0px_0px_#1C1B18] scale-[1.02]'
                         : 'bg-white hover:bg-sage-50 border-ink-200 text-ink-700'
