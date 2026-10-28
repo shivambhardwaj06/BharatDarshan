@@ -31,6 +31,42 @@ export interface RouteStep {
   tip?: string;
 }
 
+export interface BestThingToVisit {
+  title: string;
+  description: string;
+  timing_or_highlight?: string;
+  tag?: string;
+  image_url?: string;
+}
+
+export interface StopShopOrArtisan {
+  id: string;
+  name: string;
+  artisan_or_owner: string;
+  exact_location: string;
+  craft_or_items: string;
+  story: string;
+  why_must_visit: string;
+  special_treat_or_demo?: string;
+  image_url?: string;
+  badge?: string;
+}
+
+export interface JourneyStop {
+  stop_number: number;
+  name: string;
+  hindi_name?: string;
+  route_leg_name: string;
+  distance_from_start: string;
+  altitude: string;
+  estimated_time?: string;
+  tagline: string;
+  hero_image: string;
+  quick_summary: string;
+  best_things_to_visit: BestThingToVisit[];
+  local_shops: StopShopOrArtisan[];
+}
+
 export interface VerifiedArtisanStop {
   merchant_id: string;
   business_name: string;
@@ -105,6 +141,7 @@ export interface TripPlan {
     gateway_city: string;
     transit_highlights: string[];
   };
+  journey_stops?: JourneyStop[];
   days: PlanDay[];
   deep_cultural_guide: DeepCulturalGuide;
   practical_essentials: PracticalEssentials;

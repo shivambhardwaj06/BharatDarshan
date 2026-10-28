@@ -40,7 +40,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Garhwal Himalayas",
 		Coordinates:    [2]float64{30.7352, 79.0669},
 		AltitudeMeters: 3583,
-		HeroImage:      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/kedarnath.jpg",
 		IdealMonths:    "May–June (Summer Open) & September–October (Autumn Crystal Sky)",
 		VibeTags:       []string{"Sacred Panch Kedar", "High Alpine Trek", "Vedic Chants", "Mandakini Valley"},
 		ShortDesc:      "Perched beneath snowy Kedarnath peak (6,940m), one of the 12 Jyotirlingas, steeped in Mahabharata folklore and guarded by the Rawal lineage.",
@@ -55,7 +55,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Ganga Plains",
 		Coordinates:    [2]float64{25.3176, 82.9739},
 		AltitudeMeters: 80,
-		HeroImage:      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/varanasi.jpg",
 		IdealMonths:    "October to March (Pleasant river mist, Dev Deepawali season)",
 		VibeTags:       []string{"Eternal City", "Sacred Ganga Aarti", "Silk Weaving", "Subah-e-Banaras"},
 		ShortDesc:      "Mark Twain's timeless city: older than history, older than tradition. Witness thousands of years of living philosophy across 84 ghats.",
@@ -70,7 +70,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Trans-Himalayas",
 		Coordinates:    [2]float64{34.1526, 77.5771},
 		AltitudeMeters: 3500,
-		HeroImage:      "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/ladakh.jpg",
 		IdealMonths:    "June to September (High passes open, vibrant monastery festivals)",
 		VibeTags:       []string{"Moonland", "Tibetan Monasteries", "Nomadic Pashmina", "Khardung La"},
 		ShortDesc:      "Land of high mountain passes, sapphire glacial lakes, centuries-old Hemis Gompa, and Changpa nomadic wool artisans.",
@@ -85,7 +85,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Thar Desert",
 		Coordinates:    [2]float64{26.9157, 70.9083},
 		AltitudeMeters: 225,
-		HeroImage:      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/jaisalmer.jpg",
 		IdealMonths:    "October to March (Pleasant desert breeze, campfire nights)",
 		VibeTags:       []string{"Golden Fort", "Sam Sand Dunes", "Desert Folk Music", "Camel Leather"},
 		ShortDesc:      "Living golden sandstone citadel rising from the Thar desert, famous for intricate Havelis, campfire folk music, and master leather artisans.",
@@ -100,7 +100,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Western Ghats",
 		Coordinates:    [2]float64{10.0889, 77.0595},
 		AltitudeMeters: 1532,
-		HeroImage:      "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/munnar.jpg",
 		IdealMonths:    "September to March (Misty green hills, tea harvest)",
 		VibeTags:       []string{"Rolling Tea Hills", "Misty Cloud Forests", "Cardamom Plantations", "Wild Honey"},
 		ShortDesc:      "Rolling emerald tea hills blanketed in mountain mist, ancient aromatic spice trails, and indigenous mountain honey gatherers.",
@@ -115,7 +115,7 @@ func (s *PlannerService) initDestinations() {
 		Region:         "Western Himalayas",
 		Coordinates:    [2]float64{32.2461, 78.0349},
 		AltitudeMeters: 3800,
-		HeroImage:      "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1600&q=85",
+		HeroImage:      "/images/destinations/spiti.jpg",
 		IdealMonths:    "June to October (Clear blue skies, open high passes)",
 		VibeTags:       []string{"Ancient Monasteries", "Moonland Valleys", "Starry Night Skies", "Sea-Buckthorn"},
 		ShortDesc:      "Quiet mountain valley with 1,000-year-old cliffside monasteries, sea-buckthorn orchards, and welcoming high-altitude villages.",
@@ -378,7 +378,7 @@ func (s *PlannerService) buildCinematicKedarnathPlan(
 				DateOrPhase:      "Day 1 • Entering the Mountains",
 				ElevationProfile: "Gradual climb from 314m to 1,319m",
 				DistanceKm:       185.0,
-				DayImage:         "https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1200&q=80",
+				DayImage:         "/images/destinations/kedarnath.jpg",
 				RouteSteps: []domain.RouteStep{
 					{
 						TimeOfDay:   "06:30 AM",
@@ -409,7 +409,7 @@ func (s *PlannerService) buildCinematicKedarnathPlan(
 				DateOrPhase:           "Day 2 • Walking the Mountain Trail",
 				ElevationProfile:      "Climbing up from 1,982m to 3,583m",
 				DistanceKm:            16.0,
-				DayImage:              "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+				DayImage:              "/images/destinations/kedarnath.jpg",
 				VerifiedArtisanStops: artisanStops,
 				RouteSteps: []domain.RouteStep{
 					{
@@ -454,7 +454,7 @@ func (s *PlannerService) buildCinematicKedarnathPlan(
 				DateOrPhase:      "Day 3 • Temple Blessings & Descent",
 				ElevationProfile: "Walk down from 3,583m to 1,982m",
 				DistanceKm:       18.0,
-				DayImage:         "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+				DayImage:         "/images/destinations/kedarnath.jpg",
 				RouteSteps: []domain.RouteStep{
 					{
 						TimeOfDay:   "05:00 AM",
@@ -482,7 +482,7 @@ func (s *PlannerService) buildCinematicKedarnathPlan(
 				DateOrPhase:      "Day 4 • Journey Home",
 				ElevationProfile: "Driving down from 1,319m to 314m",
 				DistanceKm:       185.0,
-				DayImage:         "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+				DayImage:         "/images/destinations/kedarnath.jpg",
 				RouteSteps: []domain.RouteStep{
 					{
 						TimeOfDay:   "08:30 AM",
@@ -1142,8 +1142,8 @@ func (s *PlannerService) buildCinematicMunnarPlan(
 			},
 		},
 		PracticalEssentials: domain.PracticalEssentials{
-			AcclimatizationProtocol: "Munnar sits at a pleasant 1,500m elevation. Gentle walking is recommended; carry a light jacket for cool evening breezes.",
-			PermitsAndRegistration:  "Eravikulam National Park entry is regulated by Kerala Forest Department; pre-booking is recommended during peak months.",
+			AcclimatizationProtocol: "Munnar sits at a pleasant 1,500m elevation. Gentle walking is ideal; carry a light jacket for cool evening breezes.",
+			PermitsAndRegistration:  "Eravikulam National Park entry is regulated by Kerala Forest Department; pre-booking online is required during peak months.",
 			PackingChecklist: []string{
 				"Rain poncho or compact umbrella (hill showers can arrive suddenly)",
 				"Light wool sweater or windcheater for evenings",

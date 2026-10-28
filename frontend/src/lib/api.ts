@@ -1,4 +1,5 @@
 import { DestinationMeta, TripPlan, TripPlanRequest, VerifiedArtisanStop } from './types';
+import { getJourneyStopsForDestination } from './journeyStopsData';
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
@@ -16,7 +17,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Garhwal Himalayas',
     coordinates: [30.7352, 79.0669],
     altitude_meters: 3583,
-    hero_image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/kedarnath.jpg',
     ideal_months: 'May to June & September to October',
     vibe_tags: ['Holy Temple', 'Mountain Trek', 'Peaceful Valleys', 'Morning Bells'],
     short_desc: 'A holy temple high in the snow-capped mountains of Uttarakhand, blessed with pure streams, fresh air, and deep peace.',
@@ -30,7 +31,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Ganga Plains',
     coordinates: [25.3176, 82.9739],
     altitude_meters: 80,
-    hero_image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/varanasi.jpg',
     ideal_months: 'October to March (Pleasant weather & river breeze)',
     vibe_tags: ['Ganga Aarti', 'Boat Rides', 'Silk Weaving', 'Ancient Streets'],
     short_desc: 'One of the oldest living cities in the world. Famous for golden sunrise boat rides, glowing evening Ganga Aarti, and master silk weavers.',
@@ -44,7 +45,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Trans-Himalayas',
     coordinates: [34.1526, 77.5771],
     altitude_meters: 3500,
-    hero_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/ladakh.jpg',
     ideal_months: 'June to September (Clear sunny days & open roads)',
     vibe_tags: ['Blue Lakes', 'High Mountain Passes', 'Buddhist Monasteries', 'Warm Pashmina'],
     short_desc: 'A magical land of bright blue skies, crystal lakes like Pangong, peaceful cliffside monasteries, and warm nomadic people.',
@@ -58,7 +59,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Western Himalayas',
     coordinates: [32.2461, 78.0349],
     altitude_meters: 3800,
-    hero_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/spiti.jpg',
     ideal_months: 'June to October',
     vibe_tags: ['Quiet Mountains', 'Ancient Monasteries', 'Clear Night Stars', 'Peaceful Homestays'],
     short_desc: 'A high-altitude peaceful valley with 1,000-year-old cliffside monasteries, starry night skies, and friendly mountain villages.',
@@ -72,7 +73,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Thar Desert',
     coordinates: [26.9157, 70.9083],
     altitude_meters: 225,
-    hero_image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/jaisalmer.jpg',
     ideal_months: 'October to March (Cool desert days & campfire nights)',
     vibe_tags: ['Golden Fort', 'Sand Dunes', 'Folk Music', 'Handmade Quilts'],
     short_desc: 'A golden desert city built from yellow sandstone, famous for camel rides across sunset sand dunes and colorful Rajasthani folk music.',
@@ -86,7 +87,7 @@ export const FALLBACK_DESTINATIONS: DestinationMeta[] = [
     region: 'Western Ghats',
     coordinates: [10.0889, 77.0595],
     altitude_meters: 1532,
-    hero_image: 'https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1600&q=85',
+    hero_image: '/images/destinations/munnar.jpg',
     ideal_months: 'September to March',
     vibe_tags: ['Rolling Tea Gardens', 'Misty Hills', 'Fresh Spices', 'Waterfalls'],
     short_desc: 'Green rolling hills blanketed in fresh tea gardens, gentle mountain mist, and organic spice plantations.',
@@ -187,10 +188,10 @@ const DESTINATION_MEDIA: Record<
 > = {
   kedarnath: {
     day_images: [
-      'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/kedarnath.jpg',
+      '/images/destinations/kedarnath.jpg',
+      '/images/destinations/kedarnath.jpg',
+      '/images/destinations/kedarnath.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80',
@@ -206,14 +207,14 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1582560475093-ba66accbc424?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/kedarnath.jpg',
+    living_traditions_image: '/images/destinations/kedarnath.jpg',
   },
   varanasi: {
     day_images: [
-      'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/varanasi.jpg',
+      '/images/destinations/varanasi_evening.jpg',
+      '/images/destinations/varanasi.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80',
@@ -228,14 +229,14 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/varanasi.jpg',
+    living_traditions_image: '/images/destinations/varanasi_evening.jpg',
   },
   ladakh: {
     day_images: [
-      'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/ladakh.jpg',
+      '/images/destinations/ladakh.jpg',
+      '/images/destinations/ladakh.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80',
@@ -250,14 +251,14 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/ladakh.jpg',
+    living_traditions_image: '/images/destinations/ladakh.jpg',
   },
   jaisalmer: {
     day_images: [
-      'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1609137144820-22f3089d46f5?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/jaisalmer.jpg',
+      '/images/destinations/jaisalmer.jpg',
+      '/images/destinations/jaisalmer.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
@@ -272,14 +273,14 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/jaisalmer.jpg',
+    living_traditions_image: '/images/destinations/jaisalmer.jpg',
   },
   munnar: {
     day_images: [
-      'https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1597040663442-19e48606e300?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/munnar.jpg',
+      '/images/destinations/munnar.jpg',
+      '/images/destinations/munnar.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
@@ -294,14 +295,14 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1597040663442-19e48606e300?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/munnar.jpg',
+    living_traditions_image: '/images/destinations/munnar.jpg',
   },
   spiti: {
     day_images: [
-      'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=80',
+      '/images/destinations/spiti.jpg',
+      '/images/destinations/spiti_hero.jpg',
+      '/images/destinations/spiti.jpg',
     ],
     artisan_images: [
       'https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80',
@@ -316,8 +317,8 @@ const DESTINATION_MEDIA: Record<
       'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
     ],
-    sacred_lore_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
-    living_traditions_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
+    sacred_lore_image: '/images/destinations/spiti.jpg',
+    living_traditions_image: '/images/destinations/spiti_hero.jpg',
   },
 };
 
@@ -368,6 +369,10 @@ function enrichPlanWithImages(plan: TripPlan): TripPlan {
     }
   }
 
+  if (!plan.journey_stops || plan.journey_stops.length === 0) {
+    plan.journey_stops = getJourneyStopsForDestination(destId);
+  }
+
   return plan;
 }
 
@@ -404,7 +409,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Assi Ghat Subah ➔ Tulsi Akhada ➔ Harishchandra ➔ Dashashwamedh ➔ Golden Temple Corridor',
           elevation_profile: 'Flat River Plains (80m)',
           distance_km: 6.5,
-          day_image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/varanasi.jpg',
           route_steps: [
             {
               time_of_day: '05:30 AM',
@@ -438,7 +443,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Godowlia Chowk ➔ Gali Lohiyan ➔ Madanpura Pit-Loom Guild ➔ Varuna Bridge ➔ Sarnath',
           elevation_profile: 'Flat (80m)',
           distance_km: 8.0,
-          day_image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/varanasi_evening.jpg',
           verified_artisan_stops: [
             {
               merchant_id: 'vns-artisan-1',
@@ -481,7 +486,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Tulsi Mud Akhada ➔ Ram Bhandar ➔ Chaukhambha Lane ➔ Gowdowlia Crossroads',
           elevation_profile: 'Flat (80m)',
           distance_km: 5.0,
-          day_image: 'https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/varanasi.jpg',
           route_steps: [
             {
               time_of_day: '07:00 AM',
@@ -544,8 +549,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
             image_url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
           },
         ],
-        sacred_lore_image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
-        living_traditions_image: 'https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1200&q=80',
+        sacred_lore_image: '/images/destinations/varanasi.jpg',
+        living_traditions_image: '/images/destinations/varanasi_evening.jpg',
       },
       practical_essentials: {
         acclimatization_protocol: 'Varanasi has warm pleasant days and cool nights. Drink plenty of fresh water and coconut water while walking the ghats.',
@@ -593,7 +598,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Skara Village ➔ Leh Main Bazaar ➔ Leh Palace Ridge ➔ Shanti Stupa Sunset',
           elevation_profile: 'High Altitude Plateau (3,500m)',
           distance_km: 12.0,
-          day_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/ladakh.jpg',
           route_steps: [
             {
               time_of_day: '09:00 AM',
@@ -621,7 +626,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Shey Palace ➔ Thiksey Monastery ➔ Karu Junction ➔ Hemis Monastic Gorge',
           elevation_profile: 'River Valley (3,500m - 3,650m)',
           distance_km: 45.0,
-          day_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/ladakh.jpg',
           verified_artisan_stops: [
             {
               merchant_id: 'ladakh-artisan-1',
@@ -664,7 +669,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Sakti Valley ➔ Chang La Pass ➔ Tangtse Oasis ➔ First Glimpse of Pangong Tso',
           elevation_profile: 'Climb to 5,360m, descent to 4,225m',
           distance_km: 160.0,
-          day_image: 'https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/ladakh.jpg',
           route_steps: [
             {
               time_of_day: '06:30 AM',
@@ -727,8 +732,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
             image_url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80',
           },
         ],
-        sacred_lore_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
-        living_traditions_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+        sacred_lore_image: '/images/destinations/ladakh.jpg',
+        living_traditions_image: '/images/destinations/ladakh.jpg',
       },
       practical_essentials: {
         acclimatization_protocol: 'Leh is at 3,500m. Drink 4 liters of water daily. Rest completely for the first 24 to 48 hours. Avoid alcohol and heavy running.',
@@ -776,7 +781,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Gadi Sagar Gate ➔ First Fort Gate (Suraj Pol) ➔ King Palace Chowk ➔ 7 Jain Temples',
           elevation_profile: 'Desert Citadel (225m)',
           distance_km: 5.0,
-          day_image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/jaisalmer.jpg',
           route_steps: [
             {
               time_of_day: '08:30 AM',
@@ -803,7 +808,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Amar Sagar Gate ➔ Kothari Patwa Haveli ➔ Nathmal Haveli ➔ Desert Craft Guild',
           elevation_profile: 'Flat Desert Plains (225m)',
           distance_km: 6.5,
-          day_image: 'https://images.unsplash.com/photo-1609137144820-22f3089d46f5?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/jaisalmer.jpg',
           verified_artisan_stops: [
             {
               merchant_id: 'jaisalmer-artisan-1',
@@ -840,7 +845,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Desert Highway NH-11 ➔ Kuldhara Abandoned Village ➔ Desert National Park ➔ Sam Dunes Sunset',
           elevation_profile: 'Rolling Dunes (200m - 230m)',
           distance_km: 42.0,
-          day_image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/jaisalmer.jpg',
           route_steps: [
             {
               time_of_day: '02:00 PM',
@@ -903,8 +908,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
             image_url: 'https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80',
           },
         ],
-        sacred_lore_image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80',
-        living_traditions_image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+        sacred_lore_image: '/images/destinations/jaisalmer.jpg',
+        living_traditions_image: '/images/destinations/jaisalmer.jpg',
       },
       practical_essentials: {
         acclimatization_protocol: 'Desert climates have intense sunshine by day and crisp cool air by night. Wear cotton hats and carry hydration fluids.',
@@ -952,7 +957,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Kothamangalam ➔ Cheeyappara Waterfalls ➔ Valara Cascades ➔ Karadippara Viewpoint ➔ Munnar',
           elevation_profile: 'Climbing from sea level to 1,532m',
           distance_km: 125.0,
-          day_image: 'https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/munnar.jpg',
           route_steps: [
             {
               time_of_day: '07:30 AM',
@@ -979,7 +984,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Photo Point ➔ Mattupetty Lake ➔ Echo Point ➔ Kundala Tea Dam ➔ Top Station Ridge',
           elevation_profile: 'Mountain Crest (1,532m - 1,880m)',
           distance_km: 34.0,
-          day_image: 'https://images.unsplash.com/photo-1597040663442-19e48606e300?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/munnar.jpg',
           verified_artisan_stops: [
             {
               merchant_id: 'munnar-artisan-1',
@@ -1022,7 +1027,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Rajamalai Safari Base ➔ Anamudi Peak View (2,695m) ➔ Lakkam Waterfalls ➔ Marayoor',
           elevation_profile: 'High Mountain Sanctuary (1,600m - 2,000m)',
           distance_km: 40.0,
-          day_image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/munnar.jpg',
           route_steps: [
             {
               time_of_day: '08:30 AM',
@@ -1079,8 +1084,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
             image_url: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
           },
         ],
-        sacred_lore_image: 'https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=1200&q=80',
-        living_traditions_image: 'https://images.unsplash.com/photo-1597040663442-19e48606e300?auto=format&fit=crop&w=1200&q=80',
+        sacred_lore_image: '/images/destinations/munnar.jpg',
+        living_traditions_image: '/images/destinations/munnar.jpg',
       },
       practical_essentials: {
         acclimatization_protocol: 'Munnar enjoys mild, refreshing weather all year. A light sweater or cardigan is perfect for cool mornings and misty evenings.',
@@ -1128,7 +1133,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Atal Tunnel North ➔ Gramphu ➔ Batal Chandra River ➔ Kunzum Pass Summit ➔ Losar ➔ Kaza',
           elevation_profile: 'Climb to 4,551m, descend to 3,800m',
           distance_km: 200.0,
-          day_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/spiti.jpg',
           route_steps: [
             {
               time_of_day: '05:30 AM',
@@ -1155,7 +1160,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Rangrik Bridge ➔ Key Gompa Fortress ➔ Kibber Wildlife Sanctuary ➔ Chicham Bridge',
           elevation_profile: 'High Altitude Plateau (3,800m - 4,270m)',
           distance_km: 25.0,
-          day_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/spiti_hero.jpg',
           verified_artisan_stops: [
             {
               merchant_id: 'spiti-artisan-1',
@@ -1192,7 +1197,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           milestone_summary: 'Kaza ➔ Hikkim (Post Office) ➔ Komic (Highest Motorable Village) ➔ Langza Golden Buddha',
           elevation_profile: 'Highest Plateaus (4,400m - 4,587m)',
           distance_km: 45.0,
-          day_image: 'https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=80',
+          day_image: '/images/destinations/spiti.jpg',
           route_steps: [
             {
               time_of_day: '10:00 AM',
@@ -1255,8 +1260,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
             image_url: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
           },
         ],
-        sacred_lore_image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
-        living_traditions_image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80',
+        sacred_lore_image: '/images/destinations/spiti.jpg',
+        living_traditions_image: '/images/destinations/spiti_hero.jpg',
       },
       practical_essentials: {
         acclimatization_protocol: 'Kaza is at 3,800m. Rest on arrival. Carry Diamox if advised by your doctor and drink 4 liters of water daily.',
@@ -1304,7 +1309,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
         milestone_summary: 'Devprayag Sangam ➔ Srinagar Garhwal ➔ Rudraprayag Confluence ➔ Guptkashi',
         elevation_profile: 'Gradual climb from 314m to 1,319m',
         distance_km: 185.0,
-        day_image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1200&q=80',
+        day_image: '/images/destinations/kedarnath.jpg',
         route_steps: [
           {
             time_of_day: '06:30 AM',
@@ -1338,7 +1343,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
         milestone_summary: 'Sonprayag Shuttle ➔ Gaurikund Hot Spring ➔ Jungle Chatti ➔ Bheembali ➔ Lincholi ➔ Base Camp ➔ Temple',
         elevation_profile: 'Climbing up from 1,982m to 3,583m',
         distance_km: 16.0,
-        day_image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+        day_image: '/images/destinations/kedarnath.jpg',
         verified_artisan_stops: [
           {
             merchant_id: '11111111-2222-3333-4444-555555555551',
@@ -1393,7 +1398,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
         milestone_summary: 'Sanctum Darshan ➔ Bhairavnath Viewpoint ➔ Lincholi ➔ Bheembali ➔ Gaurikund Base',
         elevation_profile: 'Walk down from 3,583m to 1,982m',
         distance_km: 18.0,
-        day_image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+        day_image: '/images/destinations/kedarnath.jpg',
         route_steps: [
           {
             time_of_day: '05:00 AM',
@@ -1426,7 +1431,7 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
         milestone_summary: 'Guptkashi ➔ Tilwara ➔ Rudraprayag Confluence ➔ Srinagar Garhwal ➔ Rishikesh',
         elevation_profile: 'Driving down from 1,319m to 314m',
         distance_km: 185.0,
-        day_image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+        day_image: '/images/destinations/kedarnath.jpg',
         route_steps: [
           {
             time_of_day: '08:30 AM',
@@ -1490,8 +1495,8 @@ function getClientPlanForDestination(req: TripPlanRequest): TripPlan {
           image_url: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?auto=format&fit=crop&w=800&q=80',
         },
       ],
-      sacred_lore_image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
-      living_traditions_image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1200&q=80',
+      sacred_lore_image: '/images/destinations/kedarnath.jpg',
+      living_traditions_image: '/images/destinations/kedarnath.jpg',
     },
     practical_essentials: {
       acclimatization_protocol:

@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { TripPlan } from '@/lib/types';
 import { CrazyBharatDarshanLogo } from './CrazyBharatDarshanLogo';
+import { InteractiveWindingRoadPlanner } from './InteractiveWindingRoadPlanner';
+import { getJourneyStopsForDestination } from '@/lib/journeyStopsData';
 import {
   Mountain,
   Compass,
@@ -34,7 +36,9 @@ interface PlanViewerProps {
 }
 
 export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }) => {
-  const [activeTab, setActiveTab] = useState<'timeline' | 'cultural_deep_dive' | 'essentials'>('timeline');
+  const [activeTab, setActiveTab] = useState<'winding_map' | 'timeline' | 'cultural_deep_dive' | 'essentials'>('winding_map');
+
+  const journeyStops = plan.journey_stops || getJourneyStopsForDestination(plan.destination.id);
 
   // Destination-specific hero and fallback images
   const heroImage = plan.destination.hero_image;
@@ -130,6 +134,18 @@ export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }
       <div className="sticky top-16 sm:top-20 z-30 bg-[#FDFCF8]/95 backdrop-blur-md border-b-2 border-ink-900/10 py-2.5 sm:py-3.5 -mx-3 px-3 sm:mx-0 sm:px-0">
         <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-none snap-x">
           <button
+            onClick={() => setActiveTab('winding_map')}
+            className={`shrink-0 snap-start py-2 sm:py-3 px-4 sm:px-6 rounded-full text-xs sm:text-base font-black tracking-wide transition-all flex items-center gap-1.5 sm:gap-2.5 whitespace-nowrap ${
+              activeTab === 'winding_map'
+                ? 'bg-amber-400 text-ink-950 border-2 border-ink-900 shadow-[2px_2px_0px_0px_#1C1B18] sm:shadow-[3px_3px_0px_0px_#1C1B18]'
+                : 'bg-white text-ink-700 hover:bg-amber-50 border-2 border-ink-200 shadow-sm'
+            }`}
+          >
+            <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-700" />
+            <span>Winding Road Map ({journeyStops.length} Stops)</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('timeline')}
             className={`shrink-0 snap-start py-2 sm:py-3 px-4 sm:px-6 rounded-full text-xs sm:text-base font-black tracking-wide transition-all flex items-center gap-1.5 sm:gap-2.5 whitespace-nowrap ${
               activeTab === 'timeline'
@@ -138,7 +154,7 @@ export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }
             }`}
           >
             <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-coral-600" />
-            <span>Route Blueprint ({plan.days.length} Legs)</span>
+            <span>Multi-Day Overview ({plan.days.length} Legs)</span>
           </button>
 
           <button
@@ -166,6 +182,16 @@ export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }
           </button>
         </div>
       </div>
+
+      {/* ========================================================
+          TAB 0: WINDING ROAD MAP (1 STOP AT A TIME & SERPENTINE HIGHWAY)
+          ======================================================== */}
+      {activeTab === 'winding_map' && (
+        <InteractiveWindingRoadPlanner
+          stops={journeyStops}
+          destinationName={plan.destination.name}
+        />
+      )}
 
       {/* ========================================================
           TAB 1: CREATIVE ROUTE-BASED MAP BLUEPRINT & INFLUENCED ARTISANS
@@ -378,7 +404,7 @@ export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }
 
                 {/* ========================================================
                     MANDATORY CULTURAL ANCHOR: INFLUENCED LOCAL ARTISAN STOP
-                    (Marked directly on the route, NOT a passive recommendation)
+                    (Marked directly on the route, mandatory cultural visit)
                     ======================================================== */}
                 {day.verified_artisan_stops && day.verified_artisan_stops.length > 0 && (
                   <div className="pt-6 border-t-2 border-dashed border-coral-300/80 space-y-4">
@@ -707,7 +733,7 @@ export const CinematicPlanViewer: React.FC<PlanViewerProps> = ({ plan, onReset }
           <div className="p-6 sm:p-10 rounded-3xl sm:rounded-5xl bg-white border-2 border-ink-900/10 shadow-card space-y-4">
             <h4 className="font-serif font-bold text-xl sm:text-2xl text-ink-900 flex items-center gap-2.5">
               <Sparkles className="w-5 h-5 text-coral-500" />
-              <span>Recommended Packing Essentials</span>
+              <span>Mandatory Packing Checklist</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {plan.practical_essentials.packing_checklist.map((item, idx) => (
